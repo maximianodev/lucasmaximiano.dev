@@ -68,7 +68,7 @@ const ModalStyle = styled.div`
 
 export default function Modal({ children, openModal, setModalIsOpen }: Props): ReactElement {
     return (
-        <ModalStyle style={openModal ? {top: '0', opacity: '1'} : { top: '-100vw', opacity: '0'}}>
+        <ModalStyle style={openModal ? {top: '0', opacity: '1'} : { top: '-250vw', opacity: '0'}}>
             <div className="overlay" onClick={() => setModalIsOpen(false)}></div>
             <div className="children">
                 <div className="close" onClick={() => setModalIsOpen(false)}><span className="material-icons material-icons-outlined">close</span></div>
