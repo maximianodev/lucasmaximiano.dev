@@ -4,16 +4,14 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     title: string
     colors: {
-      primary: string
-      secondary: string
       background: string
       light: string
       dark: string
+      overlay: string
       colorGrey: string
       colorText: string
       colorLabel: string
       colorDisabled: string
-      overlay: string
     }
     sizes: {
       xsmall: string
@@ -40,8 +38,6 @@ declare module 'styled-components' {
   export interface CustomTheme {
     title: string
     colors: {
-      primary: string
-      secondary: string
       background: string
       light: string
       dark: string

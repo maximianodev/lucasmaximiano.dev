@@ -25,6 +25,8 @@ function MyApp({ Component, pageProps }) {
     setTheme(theme.title === 'light' ? combineTheme(dark) : combineTheme(light));
   }
 
+  console.log("version 1.0.1")
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
