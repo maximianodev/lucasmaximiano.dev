@@ -27,9 +27,9 @@ function Header(props: Props) {
         <div className="container">
             <S.Container>
                 <S.Logo>
-                    <a href="/" onMouseOver={mouseOnMenu}>
+                    <Link href="/">
                         Sr.Max
-                    </a>
+                    </Link>
                 </S.Logo>
                 <S.Nav>
                     <S.Button
@@ -39,8 +39,8 @@ function Header(props: Props) {
                         <img src="/images/sol.svg" alt="sol" style={title === 'dark' ? { width: '40px' } : { width: '0px' }} />
                         <img src="/images/lua.svg" alt="lua" style={title === 'light' ? { width: '40px' } : { width: '0px' }} />
                     </S.Button>
-                    <a href="/" onMouseOver={mouseOnMenu}>Inicio</a>
-                    <a href="/about" onMouseOver={mouseOnMenu}>Sobre</a>
+                    <Link href="/" >Inicio</Link>
+                    <Link href="/about" >Sobre</Link>
                 </S.Nav>
 
             </S.Container>
