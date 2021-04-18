@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 
 import usePersistedState from '../utils/usePersistedState'
 import { ThemeProvider, DefaultTheme } from 'styled-components'
@@ -8,24 +8,14 @@ import { combineTheme, light, dark } from '../styles/themes/index'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-function getTimeForTheme() {
-  const date = new Date();
-  const hours = date.getHours();
-  if (hours < 18) {
-    return light;
-  } else {
-    return dark;
-  }
-}
-
 function MyApp({ Component, pageProps }) {
-  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', combineTheme(getTimeForTheme()))
+  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', combineTheme(light))
 
   const toggleTheme = () => {
     setTheme(theme.title === 'light' ? combineTheme(dark) : combineTheme(light));
   }
 
-  console.log("version 1.0.1")
+  console.log("version 1.0.2")
 
   return (
     <ThemeProvider theme={theme}>
