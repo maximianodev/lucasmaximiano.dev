@@ -63,7 +63,7 @@ const Index: React.FC<Me> = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const me = props.data.author
-  
+
   function timeOfMoment() {
     const date = new Date();
     const hours = date.getHours();
@@ -116,34 +116,7 @@ const Index: React.FC<Me> = (props) => {
             <div className="projects">
               {
                 me.projects.map((item, index) => (
-                  <div key={index}>
-                    <div className="item" onClick={handleClickItem}>
-                      <img src={item.image.url} alt={item.title} />
-                      <span className="title">{item.title}
-                        <div className="links">
-                          <a href={item.github} target="_blank" rel="noopener noreferrer">
-                            <span className="material-icons material-icons-outlined">code</span>
-                          </a>
-                          <a href={item.url} target="_blank" rel="noopener noreferrer">
-                            <span className="material-icons material-icons-outlined">link</span>
-                          </a>
-                        </div></span>
-                      <span className="flag-type">{item.typeAplication.map((type, index) => <i key={index}>{type}</i>)}</span>
-                      <span className="short-description">{item.shortDescription.text}</span>
-                    </div>
-                    <Modal openModal={modalIsOpen} setModalIsOpen={setModalIsOpen}>
-                      <ul className="description">
-                        <span className="title">{item.title}</span>
-                        {item.language ? <li><strong><span className="material-icons material-icons-outlined">language</span>Linguagem:</strong> {item.language}</li> : null}
-                        {item.framework ? <li><strong><span className="material-icons material-icons-outlined">build</span>Framework:</strong> {item.framework}</li> : null}
-                        {item.libraries ? <li><strong><span className="material-icons material-icons-outlined">library_books</span>Libraries:</strong> {item.libraries}</li> : null}
-                        {item.github ? <li><strong><span className="material-icons material-icons-outlined">code</span>GitHub:</strong> <a href={item.github} target="_blank" rel="noopener noreferrer">{item.github}</a></li> : null}
-                        {item.url ? <li><strong><span className="material-icons material-icons-outlined">link</span>Url:</strong> <a href={item.url} target="_blank" rel="noopener noreferrer">{item.url}</a></li> : null}
-                        {item.typeAplication ? <li><strong><span className="material-icons material-icons-outlined">developer_board</span>Tipo de Aplicação:</strong> <span className="flag-type">{item.typeAplication.map((type, index) => <i key={index}>{type}</i>)}</span></li> : null}
-                        {item.databases ? <li><strong><span className="material-icons material-icons-outlined">save</span>Databases:</strong> {item.databases}</li> : null}
-                      </ul>
-                    </Modal>
-                  </div>
+                  <Modal data={item} key={index} />
                 ))
               }
             </div>

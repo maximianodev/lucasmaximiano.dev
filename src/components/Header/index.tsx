@@ -41,6 +41,7 @@ function Header(props: Props) {
                     </S.Button>
                     <Link href="/" >Inicio</Link>
                     <Link href="/about" >Sobre</Link>
+                    <Link href="/Blog" >Blog</Link>
                 </S.Nav>
 
             </S.Container>

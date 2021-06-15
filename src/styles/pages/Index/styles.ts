@@ -111,78 +111,7 @@ export const Section3 = styled.section`
 				grid-gap: 15px;
 			`}
 
-			.item {
-				width: 100%;
-
-				padding: 15px;
-
-				position: relative;
-				overflow: hidden;
-
-				border: 1px solid ${theme.colors.overlay};
-
-				display: flex;
-				justify-content: center;
-				flex-direction: column;
-
-				cursor: pointer;
-
-				> img {
-					width: 100%;
-					height: auto;
-					margin-bottom: 1rem;
-				}
-
-				span {
-					&:not(:last-child) {
-						margin-bottom: 0.3rem;
-					}
-				}
-
-				.title {
-					font-weight: ${theme.font.weight.bold};
-					font-size: ${theme.sizes.large};
-
-					display: flex;
-					justify-content: space-between;
-					.links {
-						a {
-							text-decoration: none;
-							color: ${theme.colors.colorText};
-							span {
-								display: inline-block;
-								&:first-child {
-									margin-right: 0.3rem;
-								}
-							}
-						}
-					}
-				}
-
-				.flag-type {
-					display: inline-block;
-					font-size: 12px;
-					width: max-content;
-					text-transform: uppercase;
-					font-weight: bold;
-
-					i {
-						background: ${theme.colors.colorText};
-						color: ${theme.colors.background};
-						padding: 0.09rem 0.3rem;
-						font-style: normal;
-						margin-right: 0.2rem;
-						display: inline-block;
-					}
-				}
-
-				.short-description {
-					z-index: 1;
-					font-size: ${theme.sizes.small};
-					font-style: italic;
-					width: 100%;
-				}
-			}
+			
 			.description {
 				list-style: none;
 				font-size: 16px;

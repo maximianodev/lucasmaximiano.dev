@@ -1,79 +1,63 @@
 import React, { Dispatch, ReactElement, SetStateAction } from 'react'
-import styled, { css } from 'styled-components';
-import media from 'styled-media-query';
-
+import { useState } from 'react';
+import * as S from "../../styles/components/Modal/index"
 interface Props {
-    children: React.ReactNode;
-    openModal: boolean;
-    setModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    data: {
+        image: {
+            url: string
+        },
+        title: string,
+        github: string,
+        url: string,
+        typeAplication: Array<string>,
+        shortDescription: {
+            text: string
+        },
+        language: string,
+        framework: string,
+        libraries: string,
+        databases: string,
+    };
 }
 
-const ModalStyle = styled.div`
-	${({ theme }) => css`
-        width: 100vw;
-        height: 100vh;
 
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 10;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        transition: opacity .2s ease-in-out;
-
-        .overlay {
-            background-color: ${theme.colors.overlay};  
-            width: 100%;
-            height: 100%;   
-            z-index:-1;   
-
-            position: absolute;
-            left: 0;
-            top: 0; 
-
-        }
-        .children {
-            position: relative;
-
-            padding: 30px;
-
-            background-color: ${theme.colors.background};  
-            z-index: 1;
-            ${media.lessThan('large')`
-                margin: 0 15px;
-                padding: 15px;
-            `}
-            .close {
-                position: absolute;
-                top: 0;
-                right: 0;
-                font-size: 26px;
-                cursor: pointer;
-                span {
-                    color: ${theme.colors.colorText};
-                    display: block;
-                    border: 2px solid ${theme.colors.colorText};
-                }
-                ${media.lessThan('large')`
-                `}
-            }
-        }
-        
-            
-	`}
-`;
-
-export default function Modal({ children, openModal, setModalIsOpen }: Props): ReactElement {
+export default function Modal({ data }: Props): ReactElement {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleClick = () => {
+        setIsOpen(!isOpen)
+    }
     return (
-        <ModalStyle style={openModal ? {top: '0', opacity: '1'} : { top: '-250vw', opacity: '0'}}>
-            <div className="overlay" onClick={() => setModalIsOpen(false)}></div>
-            <div className="children">
-                <div className="close" onClick={() => setModalIsOpen(false)}><span className="material-icons material-icons-outlined">close</span></div>
-                {children}
-            </div>
-        </ModalStyle>
+        <>
+            <S.Title className="data" onClick={handleClick}>
+                <img src={data.image.url} alt={data.title} />
+                <span className="title">{data.title}
+                    <div className="links">
+                        <a href={data.github} target="_blank" rel="noopener noreferrer">
+                            <span className="material-icons material-icons-outlined">code</span>
+                        </a>
+                        <a href={data.url} target="_blank" rel="noopener noreferrer">
+                            <span className="material-icons material-icons-outlined">link</span>
+                        </a>
+                    </div></span>
+                <span className="flag-type">{data.typeAplication.map((type, index) => <i key={index}>{type}</i>)}</span>
+                <span className="short-description">{data.shortDescription.text}</span>
+            </S.Title>
+            <S.Content style={isOpen ? { top: '0', opacity: '1' } : { top: '-250vw', opacity: '0' }}>
+                <div className="overlay" onClick={() => setIsOpen(false)}></div>
+                <div className="children">
+                    <div className="close" onClick={() => setIsOpen(false)}><span className="material-icons material-icons-outlined">close</span></div>
+                    <ul className="description">
+                        <span className="title">{data.title}</span>
+                        {data.language ? <li><strong><span className="material-icons material-icons-outlined">language</span>Linguagem:</strong> {data.language}</li> : null}
+                        {data.framework ? <li><strong><span className="material-icons material-icons-outlined">build</span>Framework:</strong> {data.framework}</li> : null}
+                        {data.libraries ? <li><strong><span className="material-icons material-icons-outlined">library_books</span>Libraries:</strong> {data.libraries}</li> : null}
+                        {data.github ? <li><strong><span className="material-icons material-icons-outlined">code</span>GitHub:</strong> <a href={data.github} target="_blank" rel="noopener noreferrer">{data.github}</a></li> : null}
+                        {data.url ? <li><strong><span className="material-icons material-icons-outlined">link</span>Url:</strong> <a href={data.url} target="_blank" rel="noopener noreferrer">{data.url}</a></li> : null}
+                        {data.typeAplication ? <li><strong><span className="material-icons material-icons-outlined">developer_board</span>Tipo de Aplicação:</strong> <span className="flag-type">{data.typeAplication.map((type, index) => <i key={index}>{type}</i>)}</span></li> : null}
+                        {data.databases ? <li><strong><span className="material-icons material-icons-outlined">save</span>Databases:</strong> {data.databases}</li> : null}
+                    </ul>
+                </div>
+            </S.Content>
+        </>
     )
 }

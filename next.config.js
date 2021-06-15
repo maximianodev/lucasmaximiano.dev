@@ -16,7 +16,7 @@ module.exports = (phase) => {
     console.log(`isDev:${isDev}  isProd:${isProd}   isStaging:${isStaging}`)
 
     const env = {
-        GRAPHQL_URL: "https://api-us-east-1.graphcms.com/v2/ckndvc13kzjx801w70id77wj3/master"
+        GRAPHQL_URL: process.env.GRAPHQL_URL
     }
 
     // next.config.js object
