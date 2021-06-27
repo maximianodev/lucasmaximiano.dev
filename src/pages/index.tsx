@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import * as S from '../styles/pages/Index/styles'
 import { request, gql } from 'graphql-request'
-import { getDataHome } from '../graphql/queries/getHomeData'
+import { getDataHome } from '../graphql/queries/home'
 import Modal from '../components/Modal'
 
 export const getStaticProps = async () => {
@@ -86,7 +86,7 @@ const Index: React.FC<Me> = (props) => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Lucas Maximiano</title>
       </Head>
       <div>
         <div className="container">

@@ -20,8 +20,14 @@ const Logo = styled.h1`
 			font-size: 36px;
 			font-weight: ${theme.font.weight.bold};
 			color: ${theme.colors.colorText};
+			img {
+				width: 100px;
+			}
 			${media.lessThan('large')`
                 font-size: 24px;
+				img {
+					width: 80px;
+				}
             `}
 		}
 	`}

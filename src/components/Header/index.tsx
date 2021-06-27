@@ -2,6 +2,7 @@ import { ThemeContext } from 'styled-components'
 import { useContext } from 'react'
 import * as S from '../../styles/components/Header/styles'
 import Link from 'next/link'
+import Image from 'next/image'
 interface Props {
     toggleTheme: () => void;
 }
@@ -12,7 +13,7 @@ function Header(props: Props) {
     function handleClick() {
         props.toggleTheme()
 
-        if(title === "dark") {
+        if (title === "dark") {
             return new Audio('/sounds/switch-on.mp3').play()
         } else {
             return new Audio('/sounds/switch-off.mp3').play()
@@ -28,7 +29,9 @@ function Header(props: Props) {
             <S.Container>
                 <S.Logo>
                     <Link href="/">
-                        Sr.Max
+                        <a>
+                            <img src="icons/logo.svg" alt="Lucas Maximiano" title="Inicio" />
+                        </a>
                     </Link>
                 </S.Logo>
                 <S.Nav>
@@ -41,7 +44,7 @@ function Header(props: Props) {
                     </S.Button>
                     <Link href="/" >Inicio</Link>
                     <Link href="/about" >Sobre</Link>
-                    <Link href="/Blog" >Blog</Link>
+                    <Link href="/blog" >Blog</Link>
                 </S.Nav>
 
             </S.Container>

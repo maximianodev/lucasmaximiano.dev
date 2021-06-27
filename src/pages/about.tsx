@@ -1,15 +1,17 @@
-import React, { ReactElement } from 'react'
-import * as S from "../styles/pages/About/styles"
-
-
+import React, { ReactElement } from 'react';
+import * as S from "../styles/pages/About/styles";
+import Head from "next/head"
 interface Props {
-   
+
 }
 
 export default function About({ }: Props): ReactElement {
 
     return (
         <S.AboutMk>
+            <Head>
+                <title>Sobre</title>
+            </Head>
             <div className="container">
                 <section className="section-1">
                     <h2>Minha trajetória 🌎</h2>

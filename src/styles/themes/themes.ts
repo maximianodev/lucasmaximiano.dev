@@ -3,7 +3,10 @@ export const light = {
     colors: {
         background: '#F5F5F5',
         light: '#fff',
-        dark: '#000',
+        purple: "#705DF2",
+        purpleDark: "#150C21",
+        dark: '#000',        
+        darkGrey: '#1A1A1A',
         overlay: '#0000004a',
         colorGrey: '#F2F5F5',
         colorText: '#000',
@@ -17,7 +20,10 @@ export const dark = {
     colors: {
         background: '#222222',
         light: '#fff',
-        dark: '#000',
+        purple: "#705DF2",
+        purpleDark: "#150C21",
+        dark: '#000',        
+        darkGrey: '#1A1A1A',
         overlay: '#ffffff4a',
         colorGrey: '#F2F5F5',
         colorText: '#fff',

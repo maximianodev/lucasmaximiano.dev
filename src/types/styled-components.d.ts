@@ -7,6 +7,8 @@ declare module 'styled-components' {
       background: string
       light: string
       dark: string
+      purple: string      
+      purpleDark: string
       overlay: string
       colorGrey: string
       colorText: string
@@ -41,6 +43,8 @@ declare module 'styled-components' {
       background: string
       light: string
       dark: string
+      purple: string      
+      purpleDark: string
       overlay: string
       colorGrey: string
       colorText: string
