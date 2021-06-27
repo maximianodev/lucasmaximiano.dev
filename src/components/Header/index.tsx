@@ -30,7 +30,7 @@ function Header(props: Props) {
                 <S.Logo>
                     <Link href="/">
                         <a>
-                            <img src="icons/logo.svg" alt="Lucas Maximiano" title="Inicio" />
+                            <img src="/icons/logo.svg" alt="Lucas Maximiano" title="Inicio" />
                         </a>
                     </Link>
                 </S.Logo>

@@ -4,6 +4,7 @@ import Head from "next/head"
 import { getAllPost, getPost } from '../../../graphql/queries/blog';
 import ReactMarkDown from "react-markdown"
 import * as S from "../../../styles/pages/Blog/Post/styles"
+import { useRouter } from 'next/router';
 
 interface PostItem {
     post: {
@@ -27,6 +28,9 @@ interface PostItem {
 }
 
 export const Post = ({ post }: PostItem) => {
+    const router = useRouter();
+
+    if (!post) return <h1>Não foi possivel encontrar este post ☹</h1>
     return (
         <S.Container className="container">
             <Head>
