@@ -5,6 +5,7 @@ import { getAllPost, getPost } from '../../../graphql/queries/blog';
 import ReactMarkDown from "react-markdown"
 import * as S from "../../../styles/pages/Blog/Post/styles"
 import { useRouter } from 'next/router';
+import BackButton from "../../../components/BackButton"
 interface PostItem {
     post: {
         category: string
@@ -41,6 +42,7 @@ export const Post = ({ post }: PostItem) => {
                 <meta property="og:url" content={router.asPath} />
                 <meta property="og:type" content={`${post.tags}`} />
             </Head>
+            <BackButton />
             <h1>{post.title}</h1>
             <div className="author">
                 <img src={post.author.picture.url} title={post.author.name} alt={post.author.name} />

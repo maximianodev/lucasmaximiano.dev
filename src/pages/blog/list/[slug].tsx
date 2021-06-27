@@ -5,7 +5,7 @@ import { request } from 'graphql-request'
 import { getAllDataBlog, getDataBlog } from "../../../graphql/queries/blog";
 import Head from "next/head"
 import * as S from "../../../styles/pages/Blog/List/styles"
-
+import BackButton from "../../../components/BackButton"
 interface Posts {
     posts: [
         {
@@ -31,16 +31,19 @@ function BlogList({ posts }: Posts) {
             <Head>
                 <title>Blog - {router.query.slug}</title>
             </Head>
-            {posts.map(post => (
-                <div className="post" key={post.id}>
-                    <Link href={`/blog/post/${post.slug}`}>
-                        <a>
-                            <h2>{post.title}</h2>
-                            <img src={post.coverImage.url} alt={post.coverImage.fileName} />
-                        </a>
-                    </Link>
-                </div>
-            ))}
+            <BackButton />
+            <div>
+                {posts.map(post => (
+                    <div className="post" key={post.id}>
+                        <Link href={`/blog/post/${post.slug}`}>
+                            <a>
+                                <h2>{post.title}</h2>
+                                <img src={post.coverImage.url} alt={post.coverImage.fileName} />
+                            </a>
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </S.Container>
     )
 }
