@@ -6,12 +6,18 @@ import { getDataHome } from '../graphql/queries/home'
 import Modal from '../components/Modal'
 
 export const getStaticProps = async () => {
-  const response = await request(process.env.GRAPHQL_URL, getDataHome)
+  const data = await request(process.env.GRAPHQL_URL, getDataHome)
+
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     revalidate: 518400, // 6 Days
     props: {
-      data: response
+      data
     }
   }
 }

@@ -8,6 +8,10 @@ import { combineTheme, light, dark } from '../styles/themes/index'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
+export function reportWebVitals(metric) {
+  console.log(metric)
+}
+
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', combineTheme(light))
 

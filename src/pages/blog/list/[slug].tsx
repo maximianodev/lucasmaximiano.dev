@@ -31,7 +31,6 @@ function BlogList({ posts }: Posts) {
             <Head>
                 <title>Blog - {router.query.slug}</title>
             </Head>
-            {posts.length < 1 && <img src="/images/building.gif" title="Construindo..." />}
             {posts.map(post => (
                 <div className="post" key={post.id}>
                     <Link href={`/blog/post/${post.slug}`}>
@@ -47,12 +46,24 @@ function BlogList({ posts }: Posts) {
 }
 
 export const getStaticProps = async (context) => {
-    const response = await request(process.env.GRAPHQL_URL, getDataBlog, { categoryName: context.params.slug })
-    const posts = response.posts
+    try {
+        const response = await request(process.env.GRAPHQL_URL, getDataBlog, { categoryName: context.params.slug })
+        const data = response.posts
 
-    return {
-        props: { posts },
-    };
+        if (data.length === 0 || !data) {
+            return {
+                notFound: true,
+            }
+        }
+        return {
+            props: { posts: data },
+        };
+    } catch (err) {
+        console.log(err);
+        return {
+            notFound: true,
+        }
+    }
 };
 
 export const getStaticPaths = async (context) => {

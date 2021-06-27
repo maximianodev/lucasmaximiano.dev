@@ -5,7 +5,6 @@ import { getAllPost, getPost } from '../../../graphql/queries/blog';
 import ReactMarkDown from "react-markdown"
 import * as S from "../../../styles/pages/Blog/Post/styles"
 import { useRouter } from 'next/router';
-
 interface PostItem {
     post: {
         category: string
@@ -23,7 +22,8 @@ interface PostItem {
             picture: {
                 url: string
             }
-        }
+        },
+        createdAt: string
     }
 }
 
@@ -35,14 +35,22 @@ export const Post = ({ post }: PostItem) => {
         <S.Container className="container">
             <Head>
                 <title>Blog - {post.title}</title>
+                <meta name="description" content={post.excerpt} />
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={post.excerpt} />
+                <meta property="og:url" content={router.asPath} />
+                <meta property="og:type" content={`${post.tags}`} />
             </Head>
             <h1>{post.title}</h1>
             <div className="author">
                 <img src={post.author.picture.url} title={post.author.name} alt={post.author.name} />
                 <span>{post.author.name}</span>
             </div>
+            <small>
+                Postado em {new Date(post.createdAt).toLocaleDateString('pt-BR')}
+            </small>
             <div className="tags">
-                {post.tags.map(item => <span>{item}</span>)}
+                {post.tags.map(item => <span key={item}>{item}</span>)}
             </div>
             <img src={post.coverImage.url} alt={post.title} className="post-img" />
             <div className="content">
@@ -55,11 +63,25 @@ export const Post = ({ post }: PostItem) => {
 }
 
 export const getStaticProps = async (context) => {
-    const response = await request(process.env.GRAPHQL_URL, getPost, { slugName: context.params.slug })
-    const post = response.post
+    try {
+        const response = await request(process.env.GRAPHQL_URL, getPost, { slugName: context.params.slug })
+        const data = response.post
 
-    return {
-        props: { post }
+        if (data.length === 0 || !data) {
+            return {
+                notFound: true,
+            };
+        };
+
+        return {
+            props: { post: data }
+        };
+
+    } catch (err) {
+        console.log(err);
+        return {
+            notFound: true,
+        };
     };
 };
 
