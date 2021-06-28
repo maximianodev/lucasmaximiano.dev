@@ -36,9 +36,8 @@ function BlogList({ posts }: Posts) {
                 {posts.map(post => (
                     <div className="post" key={post.id}>
                         <Link href={`/blog/post/${post.slug}`}>
-                            <a>
+                            <a style={{ background: `url(${post.coverImage.url})` }}>
                                 <h2>{post.title}</h2>
-                                <img src={post.coverImage.url} alt={post.coverImage.fileName} />
                             </a>
                         </Link>
                     </div>

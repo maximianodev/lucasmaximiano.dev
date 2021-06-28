@@ -5,6 +5,11 @@ export const Container = styled.div`
 	${({ theme }) => css`
 		${media.lessThan('large')`
 		`}
+        .back-button {
+            ${media.lessThan('large')`
+                margin-left: 15px;
+            `};
+        }
         > div {
             margin-top: 3rem;
             margin-bottom: 3rem;
@@ -16,29 +21,30 @@ export const Container = styled.div`
             `};
             .post {
                 width: 100%;
-                height: 220px;
-                position: relative;
                 ${media.lessThan('large')`
                     width: calc(100% - 30px);
-                    height: 300px;
                     margin-left: 15px;
                 `}
-                h2 {
+                a {
+                    display: flex;
+                    text-decoration: none;
                     padding: 15px;
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    color: #fff;
-                    z-index: 1;
-                }
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    object-position: center;
-                    border-radius: 5px;
+                    border-radius: 4px;
                     position: relative;
-                    filter: brightness(.5);
+                    overflow: hidden;
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.7);
+                    }
+                    h2 {
+                        color: #fff;
+                        z-index: 1;
+                    }
                 }
             }
         }

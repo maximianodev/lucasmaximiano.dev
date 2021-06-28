@@ -49,7 +49,11 @@ export const Container = styled.article`
             font-size: 1.2rem;
             p {
                 margin: 1.3rem 0;
-                line-height: 1.7;
+                line-height: 2;
+            }
+            a {
+                font-size: 2rem;
+                color: ${theme.colors.colorText};
             }
         }
 	`}

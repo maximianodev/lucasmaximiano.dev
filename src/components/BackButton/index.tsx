@@ -11,7 +11,7 @@ export default function BackButton({ }: Props): ReactElement {
 
     return (
         <S.Container>
-            <span onClick={() => router.back()}>
+            <span onClick={() => router.back()} className="back-button">
                 <span className="material-icons material-icons-outlined">
                     arrow_back
                 </span>
