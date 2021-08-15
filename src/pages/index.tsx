@@ -93,6 +93,12 @@ const Index: React.FC<Me> = (props) => {
     <>
       <Head>
         <title>Lucas Maximiano</title>
+        <meta property="og:description" content="Carrer and projects." />
+        <meta property="og:url" content="https://lucasmaximiano-dev.vercel.app/" />
+        <meta property="og:type" content="profile" />
+        <meta property="og:site_name" content="Portfolio" />
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/48106333?v=4?s=400"></meta>
+        <meta property="og:image:alt" content="Carrer and projects."></meta>
       </Head>
       <div>
         <div className="container">
