@@ -15,7 +15,7 @@ function Footer() {
                     </a>
                 </p>
                 <p className="social">
-                    <a href="https://www.instagram.com/lu.max__/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://www.instagram.com/lu.m4x/" target="_blank" rel="noopener noreferrer">Instagram</a>
                     <a href="https://github.com/sr-max" target="_blank" rel="noopener noreferrer">GitHub</a>
                     <a href="https://www.linkedin.com/in/lucaslopesmaximiano/" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 </p>
