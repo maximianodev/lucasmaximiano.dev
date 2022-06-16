@@ -7,7 +7,7 @@ declare module 'styled-components' {
       background: string
       light: string
       dark: string
-      purple: string      
+      purple: string
       purpleDark: string
       overlay: string
       colorGrey: string
@@ -23,12 +23,12 @@ declare module 'styled-components' {
       xlarge: string
       xxlarge: string
       xxxlarge: string
-    },
+    }
     font: {
       family: {
         primary: string
         secondary: string
-      },
+      }
       weight: {
         light: number
         normal: number
@@ -43,7 +43,7 @@ declare module 'styled-components' {
       background: string
       light: string
       dark: string
-      purple: string      
+      purple: string
       purpleDark: string
       overlay: string
       colorGrey: string

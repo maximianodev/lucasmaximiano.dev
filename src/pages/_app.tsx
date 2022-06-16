@@ -9,10 +9,13 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 function MyApp({ Component, pageProps }) {
-  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', combineTheme(light))
+  const [theme, setTheme] = usePersistedState<DefaultTheme>(
+    'theme',
+    combineTheme(light)
+  )
 
   const toggleTheme = () => {
-    setTheme(theme.title === 'light' ? combineTheme(dark) : combineTheme(light));
+    setTheme(theme.title === 'light' ? combineTheme(dark) : combineTheme(light))
   }
 
   return (

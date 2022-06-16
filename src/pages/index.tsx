@@ -17,8 +17,8 @@ export const getStaticProps = async () => {
   return {
     revalidate: 518400, // 6 Days
     props: {
-      data
-    }
+      data,
+    },
   }
 }
 interface Me {
@@ -43,7 +43,6 @@ interface Me {
           github: string
           framework: string
           databases: string
-
         }
       ]
       timelines: [
@@ -71,17 +70,17 @@ const Index: React.FC<Me> = (props) => {
   const me = props.data.author
 
   function timeOfMoment() {
-    const date = new Date();
-    const hours = date.getHours();
-    let time;
+    const date = new Date()
+    const hours = date.getHours()
+    let time
     if (hours < 12) {
-      time = "Bom Dia"
+      time = 'Bom Dia'
     } else if (hours < 18) {
-      time = "Boa Tarde"
+      time = 'Boa Tarde'
     } else {
-      time = "Boa Noite"
+      time = 'Boa Noite'
     }
-    return time;
+    return time
   }
 
   const handleClickItem = (ev) => {
@@ -94,10 +93,16 @@ const Index: React.FC<Me> = (props) => {
       <Head>
         <title>Lucas Maximiano</title>
         <meta property="og:description" content="Carrer and projects." />
-        <meta property="og:url" content="https://lucasmaximiano-dev.vercel.app/" />
+        <meta
+          property="og:url"
+          content="https://lucasmaximiano-dev.vercel.app/"
+        />
         <meta property="og:type" content="profile" />
         <meta property="og:site_name" content="Portfolio" />
-        <meta property="og:image" content="https://avatars.githubusercontent.com/u/48106333?v=4?s=400"></meta>
+        <meta
+          property="og:image"
+          content="https://avatars.githubusercontent.com/u/48106333?v=4?s=400"
+        ></meta>
         <meta property="og:image:alt" content="Carrer and projects."></meta>
       </Head>
       <div>
@@ -109,51 +114,43 @@ const Index: React.FC<Me> = (props) => {
         </div>
         <div className="container">
           <S.Section2>
-            <small>Olá <i>{timeOfMoment()}!</i></small>
+            <small>
+              Olá <i>{timeOfMoment()}!</i>
+            </small>
             <h2>
               <span>Sou</span>
               {me.name}
             </h2>
-            <p>
-              {me.biography}
-            </p>
+            <p>{me.biography}</p>
           </S.Section2>
         </div>
         <div className="container">
           <S.Section3>
-            <h2>
-              Projetos
-            </h2>
+            <h2>Projetos</h2>
             <img src="/images/building.gif" />
             <div className="projects">
-              {
-                me.projects.map((item, index) => (
-                  <Modal data={item} key={index} />
-                ))
-              }
+              {me.projects.map((item, index) => (
+                <Modal data={item} key={index} />
+              ))}
             </div>
           </S.Section3>
         </div>
         <S.Section4>
-          <h2>
-            linha do tempo
-          </h2>
+          <h2>linha do tempo</h2>
           <div className="container">
-            {
-              me.timelines[0].content.map((item, index) => (
-                <div className="items" key={index}>
-                  <div className="title">{item.age}</div>
-                  <div className="container-items">
-                    {item.content.map((content, index2) => (
-                      <div className="item" key={index2}>
-                        <div className="sub-title">{content.title}</div>
-                        <div className="content">{content.description}</div>
-                      </div>
-                    ))}
-                  </div>
+            {me.timelines[0].content.map((item, index) => (
+              <div className="items" key={index}>
+                <div className="title">{item.age}</div>
+                <div className="container-items">
+                  {item.content.map((content, index2) => (
+                    <div className="item" key={index2}>
+                      <div className="sub-title">{content.title}</div>
+                      <div className="content">{content.description}</div>
+                    </div>
+                  ))}
                 </div>
-              ))
-            }
+              </div>
+            ))}
           </div>
         </S.Section4>
       </div>
@@ -161,4 +158,4 @@ const Index: React.FC<Me> = (props) => {
   )
 }
 
-export default Index;
+export default Index

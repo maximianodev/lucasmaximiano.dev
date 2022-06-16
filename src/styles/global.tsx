@@ -1,7 +1,6 @@
 import { createGlobalStyle, css } from 'styled-components'
 import media from 'styled-media-query'
 
-
 const GlobalStyle = createGlobalStyle`
   ${({ theme }) => css`
     * {
@@ -11,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
       outline: none;
       font-family: ${theme.font.family.primary};
     }
-  
+
     body {
       color: ${theme.colors.colorText};
       background: ${theme.colors.background};
@@ -25,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
       &::selection {
         background: ${theme.colors.colorText};
         color: ${theme.colors.background};
-      } 
+      }
     }
 
     .container {
@@ -41,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
       max-width: 100%;
       height: auto;
     }
-    
+
     ${media.lessThan('large')`
       html {
           font-size: 93.75%;
