@@ -18,7 +18,7 @@ const Header = ({ themeContext }: HeaderProps): JSX.Element => {
 
   const isLightTheme = theme.title === 'light' ? true : false
 
-  const toggleTheme = () => {
+  function toggleTheme() {
     if (isLightTheme) {
       return setTheme(combineTheme(dark))
     }
