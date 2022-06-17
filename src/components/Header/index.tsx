@@ -1,17 +1,22 @@
-import { ThemeContext } from 'styled-components'
-import { useContext } from 'react'
-import * as S from '../../styles/components/Header/styles'
+import React, { useContext } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-interface Props {
+import { ThemeContext } from 'styled-components'
+
+import { combineTheme, light, dark } from '../../styles/themes/index'
+
+interface HeaderProps {
   toggleTheme: () => void
 }
 
-function Header(props: Props) {
-  const { colors, title } = useContext(ThemeContext)
+function Header({ theme, setTheme }: any) {
+  const { title } = useContext(ThemeContext)
 
-  function handleClick() {
-    props.toggleTheme()
+  const toggleTheme = () => {
+    setTheme(theme.title === 'light' ? combineTheme(dark) : combineTheme(light))
+  }
+
+  function handleSwitchTheme() {
+    toggleTheme()
 
     if (title === 'dark') {
       return new Audio('/sounds/switch-on.mp3').play()
@@ -20,41 +25,43 @@ function Header(props: Props) {
     }
   }
 
-  function mouseOnMenu() {
-    return new Audio('/sounds/menu-open.mp3').play()
-  }
-
   return (
-    <div className="container">
-      <S.Container>
-        <S.Logo>
-          <Link href="/">
-            <a>
-              <img src="/icons/logo.svg" alt="Lucas Maximiano" title="Inicio" />
-            </a>
-          </Link>
-        </S.Logo>
-        <S.Nav>
-          <S.Button onClick={handleClick}>
-            <S.Alert className="material-icons material-icons-outlined">
-              expand_more
-            </S.Alert>
-            <img
-              src="/images/sol.svg"
-              alt="sol"
-              style={title === 'dark' ? { width: '40px' } : { width: '0px' }}
-            />
-            <img
-              src="/images/lua.svg"
-              alt="lua"
-              style={title === 'light' ? { width: '40px' } : { width: '0px' }}
-            />
-          </S.Button>
-          <Link href="/">Inicio</Link>
-          <Link href="/about">Sobre</Link>
-          <Link href="/blog">Blog</Link>
-        </S.Nav>
-      </S.Container>
+    <div>
+      <Link href="/">
+        <a>
+          <img src="/icons/logo.svg" alt="Lucas Maximiano" title="Inicio" />
+        </a>
+      </Link>
+
+      <button onClick={handleSwitchTheme}>
+        <span className="material-icons material-icons-outlined">
+          expand_more
+        </span>
+        <img
+          src="/images/sol.svg"
+          alt="sol"
+          style={title === 'dark' ? { width: '40px' } : { width: '0px' }}
+        />
+        <img
+          src="/images/lua.svg"
+          alt="lua"
+          style={title === 'light' ? { width: '40px' } : { width: '0px' }}
+        />
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <Link href="/">Inicio</Link>
+          </li>
+          <li>
+            <Link href="/about">Sobre</Link>
+          </li>
+          <li>
+            <Link href="/blog">Blog</Link>
+          </li>
+        </ul>
+      </nav>
     </div>
   )
 }
