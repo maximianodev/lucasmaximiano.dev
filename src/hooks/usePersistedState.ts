@@ -5,7 +5,7 @@ type Response<T> = [T, Dispatch<SetStateAction<T>>]
 function usePersistedState<T>(key: string, initialState: T): Response<T> {
   const [state, setState] = useState(initialState)
 
-  useEffect(() => {
+  function validateTheme() {
     const storageValue = localStorage.getItem(key)
 
     if (storageValue) {
@@ -13,11 +13,14 @@ function usePersistedState<T>(key: string, initialState: T): Response<T> {
     } else {
       return setState(initialState)
     }
-  }, [])
+  }
 
-  useEffect(() => {
+  function handleChangeThemeContext() {
     localStorage.setItem(key, JSON.stringify(state))
-  }, [key, state])
+  }
+
+  useEffect(() => validateTheme(), [])
+  useEffect(() => handleChangeThemeContext(), [key, state])
 
   return [state, setState]
 }

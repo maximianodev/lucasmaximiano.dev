@@ -2,7 +2,7 @@ import React from 'react'
 import type { AppProps } from 'next/app'
 import { ThemeProvider, DefaultTheme } from 'styled-components'
 
-import usePersistedState from '../utils/usePersistedState'
+import usePersistedState from '../hooks/usePersistedState'
 import { GlobalStyle } from '../styles/global'
 import { combineTheme, light } from '../styles/themes/index'
 
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
 
-      <Header theme={theme} setTheme={setTheme} />
+      <Header themeContext={{ theme, setTheme, combineTheme}} />
 
       <Component {...pageProps} />
 

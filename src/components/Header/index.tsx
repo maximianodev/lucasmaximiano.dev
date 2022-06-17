@@ -1,24 +1,35 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { ThemeContext } from 'styled-components'
 
-import { combineTheme, light, dark } from '../../styles/themes/index'
+import type { CustomTheme, DefaultTheme } from 'styled-components'
+
+import { light, dark } from '../../styles/themes/index'
 
 interface HeaderProps {
-  toggleTheme: () => void
+  themeContext: {
+    theme: DefaultTheme
+    setTheme: (theme: DefaultTheme) => void
+    combineTheme: (theme: CustomTheme) => DefaultTheme
+  }
 }
 
-function Header({ theme, setTheme }: any) {
-  const { title } = useContext(ThemeContext)
+const Header = ({ themeContext }: HeaderProps): JSX.Element => {
+  const { theme, setTheme, combineTheme } = themeContext
+
+  const isLightTheme = theme.title === 'light' ? true : false
 
   const toggleTheme = () => {
-    setTheme(theme.title === 'light' ? combineTheme(dark) : combineTheme(light))
+    if (isLightTheme) {
+      return setTheme(combineTheme(dark))
+    }
+
+    return setTheme(combineTheme(light))
   }
 
   function handleSwitchTheme() {
     toggleTheme()
 
-    if (title === 'dark') {
+    if (!isLightTheme) {
       return new Audio('/sounds/switch-on.mp3').play()
     } else {
       return new Audio('/sounds/switch-off.mp3').play()
@@ -40,12 +51,12 @@ function Header({ theme, setTheme }: any) {
         <img
           src="/images/sol.svg"
           alt="sol"
-          style={title === 'dark' ? { width: '40px' } : { width: '0px' }}
+          style={!isLightTheme ? { width: '40px' } : { width: '0px' }}
         />
         <img
           src="/images/lua.svg"
           alt="lua"
-          style={title === 'light' ? { width: '40px' } : { width: '0px' }}
+          style={isLightTheme ? { width: '40px' } : { width: '0px' }}
         />
       </button>
 
@@ -66,4 +77,4 @@ function Header({ theme, setTheme }: any) {
   )
 }
 
-export default Header
+export { Header }
