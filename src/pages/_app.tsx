@@ -6,8 +6,8 @@ import usePersistedState from '../hooks/usePersistedState'
 import { GlobalStyle } from '../styles/global'
 import { combineTheme, light } from '../styles/themes/index'
 
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const [theme, setTheme] = usePersistedState<DefaultTheme>(
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
 
-      <Header themeContext={{ theme, setTheme, combineTheme}} />
+      <Header themeContext={{ theme, setTheme, combineTheme }} />
 
       <Component {...pageProps} />
 
