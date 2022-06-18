@@ -35,7 +35,7 @@ export const getStaticProps = async () => {
   return {
     revalidate: 518400, // 6 Days
     props: {
-      projects: data.author.projects,
+      projects: data.projects,
     },
   }
 }
