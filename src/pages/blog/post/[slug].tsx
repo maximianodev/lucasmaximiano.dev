@@ -30,7 +30,6 @@ interface PostItem {
 }
 
 export const Post = ({ post }: PostItem) => {
-console.log('🚀 ~ file: [slug].tsx ~ line 33 ~ Post ~ post', post)
   const router = useRouter()
 
   if (router.isFallback) return <>Carregando...</>
