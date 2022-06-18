@@ -26,8 +26,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "files": [
-    "src/types/styled-components.d.ts"
   ]
 }

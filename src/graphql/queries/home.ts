@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from "@apollo/client";
 
 const AUTHOR_DATA_QUERY = gql`
   query AuthorQuery {
@@ -6,26 +6,6 @@ const AUTHOR_DATA_QUERY = gql`
       id
       name
       biography
-      projects {
-        id
-        shortDescription {
-          text
-        }
-        title
-        image {
-          url
-        }
-        language
-        libraries
-        url
-        github
-        framework
-        databases
-        typeAplication
-      }
-      timelines {
-        content
-      }
     }
   }
 `

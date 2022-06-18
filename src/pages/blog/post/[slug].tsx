@@ -1,11 +1,12 @@
-import request from 'graphql-request'
 import React from 'react'
-import Head from 'next/head'
-import { getAllPost, getPost } from '../../../graphql/queries/blog'
-import ReactMarkDown from 'react-markdown'
-import * as S from '../../../styles/pages/Blog/Post/styles'
 import { useRouter } from 'next/router'
-import BackButton from '../../../components/BackButton'
+import Head from 'next/head'
+
+import ReactMarkDown from 'react-markdown'
+
+import { ALL_POSTS_SLUG, POST_BY_SLUG } from '../../../graphql/queries/blog'
+import { apolloClient } from '../../../client/apollo'
+
 interface PostItem {
   post: {
     category: string
@@ -29,20 +30,23 @@ interface PostItem {
 }
 
 export const Post = ({ post }: PostItem) => {
+console.log('🚀 ~ file: [slug].tsx ~ line 33 ~ Post ~ post', post)
   const router = useRouter()
 
+  if (router.isFallback) return <>Carregando...</>
+
   if (!post) return <h1>Não foi possivel encontrar este post ☹</h1>
+
   return (
-    <S.Container className="container">
+    <div>
       <Head>
-        <title>Blog - {post.title}</title>
+        <title>{`Blog - ${post.title}`}</title>
         <meta name="description" content={post.excerpt} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:url" content={router.asPath} />
         <meta property="og:type" content={`${post.tags}`} />
       </Head>
-      <BackButton />
       <h1>{post.title}</h1>
       <div className="author">
         <img
@@ -64,37 +68,44 @@ export const Post = ({ post }: PostItem) => {
       <div className="content">
         <ReactMarkDown>{post.content.markdown}</ReactMarkDown>
       </div>
-    </S.Container>
+    </div>
   )
 }
 
 export const getStaticProps = async (context) => {
   try {
-    const response = await request(process.env.GRAPHQL_URL, getPost, {
-      slugName: context.params.slug,
+    const { data } = await apolloClient.query({
+      query: POST_BY_SLUG,
+      variables: {
+        slugName: context.params.slug,
+      },
     })
-    const data = response.post
+    const { post } = data
 
-    if (data.length === 0 || !data) {
+    if (!post) {
       return {
         notFound: true,
       }
     }
 
     return {
-      props: { post: data },
+      props: { post },
     }
   } catch (err) {
     console.log(err)
+
     return {
       notFound: true,
     }
   }
 }
 
-export const getStaticPaths = async (context) => {
-  const response = await request(process.env.GRAPHQL_URL, getAllPost)
-  const paths = response.posts.map(({ slug }) => {
+export const getStaticPaths = async () => {
+  const { data } = await apolloClient.query({
+    query: ALL_POSTS_SLUG,
+  })
+
+  const paths = data.posts.map(({ slug }) => {
     return { params: { slug: slug } }
   })
 

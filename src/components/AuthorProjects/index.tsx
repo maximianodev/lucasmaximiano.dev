@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Modal from '../Modal'
-
 export type AuthorProjectProps = {
   id: number
   shortDescription: {
@@ -28,11 +26,9 @@ const AuthorProjects = ({ data }: AuthorProjectsProps) => {
   return (
     <div>
       <div className="container">
-        <h2>Projetos</h2>
-        <img src="/images/building.gif" />
         <div className="projects">
-          {data.map((item, index) => (
-            <Modal data={item} key={index} />
+          {data.map((item) => (
+            <div key={item.id}>{item.title}</div>
           ))}
         </div>
       </div>

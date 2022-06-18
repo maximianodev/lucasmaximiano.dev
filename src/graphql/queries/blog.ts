@@ -1,29 +1,7 @@
-import { gql } from 'graphql-request'
+import { gql } from '@apollo/client'
 
-export const getDataBlog = gql`
-  query getDataBlog($categoryName: String) {
-    posts(where: { category: $categoryName }) {
-      id
-      title
-      slug
-      tags
-      stage
-      publishedAt
-      excerpt
-      category
-      content {
-        markdown
-      }
-      coverImage {
-        fileName
-        url
-      }
-    }
-  }
-`
-
-export const getAllDataBlog = gql`
-  query getAllDataBlog {
+export const ALL_POSTS = gql`
+  query AllPosts {
     posts {
       id
       title
@@ -44,8 +22,8 @@ export const getAllDataBlog = gql`
   }
 `
 
-export const getPost = gql`
-  query getPost($slugName: String) {
+export const POST_BY_SLUG = gql`
+  query PostBySlug($slugName: String) {
     post(where: { slug: $slugName }) {
       id
       title
@@ -71,8 +49,8 @@ export const getPost = gql`
   }
 `
 
-export const getAllPost = gql`
-  query getAllPost {
+export const ALL_POSTS_SLUG = gql`
+  query AllPostSlug {
     posts {
       slug
     }

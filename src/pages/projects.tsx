@@ -1,34 +1,29 @@
 import React from 'react'
 
-import { AUTHOR_DATA_QUERY } from '../graphql/queries/home'
-
-import { AuthorBiography } from '../components/AuthorBiography'
+import { AuthorProjects } from '../components/AuthorProjects'
 
 import type { AuthorProjectProps } from '../components/AuthorProjects'
 import { apolloClient } from '../client/apollo'
+import { PROJECTS } from '../graphql/queries/projects'
 
-type Author = {
-  biography: string
+interface ProjectsPageProps {
   projects: AuthorProjectProps[]
 }
 
-interface HomeProps {
-  data: Author
-}
-
-function Home({ data }: HomeProps) {
-  const { biography } = data
-
+function Home({ projects }: ProjectsPageProps) {
+  
   return (
     <div>
-      <AuthorBiography data={biography} />
+      <h1>Projetos</h1>
+
+      <AuthorProjects data={projects} />
     </div>
   )
 }
 
 export const getStaticProps = async () => {
   const { data } = await apolloClient.query({
-    query: AUTHOR_DATA_QUERY,
+    query: PROJECTS,
   })
 
   if (!data) {
@@ -40,7 +35,7 @@ export const getStaticProps = async () => {
   return {
     revalidate: 518400, // 6 Days
     props: {
-      data: data.author,
+      projects: data.author.projects,
     },
   }
 }

@@ -5,13 +5,6 @@ const Footer = (): JSX.Element => {
     <footer>
       <address>
         <a
-          href="https://www.google.com.br/maps/place/Bragança Paulista - São Paulo - Brazil"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Bragança Paulista - São Paulo - Brazil
-        </a>
-        <a
           href="mailto:lucas97lopes@hotmail.com"
           target="_blank"
           rel="noopener noreferrer"

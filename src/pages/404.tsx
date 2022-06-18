@@ -1,15 +1,7 @@
-import React, { ReactElement } from 'react'
-import * as S from '../styles/pages/404/styles'
-import BackButton from '../components/BackButton/index'
-interface Props {}
+import React from 'react'
 
-export default function Custom404({}: Props): ReactElement {
-  return (
-    <S.Container className="container">
-      <div>
-        <BackButton />
-        <img src="/images/building.gif" />
-      </div>
-    </S.Container>
-  )
+function Custom404() {
+  return <img src="/images/building.gif" />
 }
+
+export default Custom404
