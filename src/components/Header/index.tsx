@@ -1,30 +1,27 @@
 import React from 'react'
-import Link from 'next/link'
 import { Box, Container } from '@chakra-ui/react'
+
+import { MenuMobile } from './MenuMobile'
+import { Logo } from '../Logo'
+import { ThemeSwitcher } from '../ThemeSwitcher'
+
+const menuItems = [
+  { slug: '', title: 'Home' },
+  { slug: 'blog', title: 'Blog' },
+  { slug: 'projects', title: 'Projects' },
+]
 
 const Header = (): JSX.Element => {
   return (
     <Box as="header">
-      <Container display="flex" alignItems="center">
-        <Link href="/">
-          <a>
-            <span>Lucas Maximiano</span>
-          </a>
-        </Link>
+      <Container display="flex" alignItems="center" justifyContent="space-between" py={5}>
+        <Box display="flex" alignItems="center">
+          <MenuMobile data={menuItems} />
 
-        <nav>
-          <ul>
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/blog">Blog</Link>
-            </li>
-            <li>
-              <Link href="/projects">Projects</Link>
-            </li>
-          </ul>
-        </nav>
+          <Logo />
+        </Box>
+
+        <ThemeSwitcher />
       </Container>
     </Box>
   )

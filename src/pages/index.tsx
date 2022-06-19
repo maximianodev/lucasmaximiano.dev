@@ -6,7 +6,6 @@ import { AuthorBiography } from '../components/AuthorBiography'
 
 import type { AuthorProjectProps } from '../components/AuthorProjects'
 import { apolloClient } from '../client/apollo'
-import { Button,  useColorMode } from '@chakra-ui/react'
 
 type Author = {
   biography: string
@@ -19,13 +18,9 @@ interface HomeProps {
 
 function Home({ data }: HomeProps) {
   const { biography } = data
-  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <div>
-      <Button onClick={toggleColorMode} colorScheme="teal">
-        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-      </Button>
       <AuthorBiography data={biography} />
     </div>
   )
