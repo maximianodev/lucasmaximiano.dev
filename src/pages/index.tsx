@@ -6,9 +6,10 @@ import { AuthorBiography } from '../components/AuthorBiography'
 
 import type { AuthorProjectProps } from '../components/AuthorProjects'
 import { apolloClient } from '../client/apollo'
+import Head from 'next/head'
 
 type Author = {
-  biography: string
+  biography: { markdown: string }
   projects: AuthorProjectProps[]
 }
 
@@ -20,9 +21,12 @@ function Home({ data }: HomeProps) {
   const { biography } = data
 
   return (
-    <div>
-      <AuthorBiography data={biography} />
-    </div>
+    <>
+      <Head>
+        <title>Max | Home</title>
+      </Head>
+      <AuthorBiography data={biography.markdown} />
+    </>
   )
 }
 
@@ -38,7 +42,6 @@ export const getStaticProps = async () => {
   }
 
   return {
-    revalidate: 518400, // 6 Days
     props: {
       data: data.author,
     },

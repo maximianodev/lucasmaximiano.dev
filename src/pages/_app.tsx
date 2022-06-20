@@ -1,6 +1,6 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/client'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Container, VStack } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 
 import { Header } from '../components/Header'
@@ -13,13 +13,15 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ApolloProvider client={apolloClient}>
       <ChakraProvider theme={theme}>
-        <Header />
+        <VStack minHeight="100vh">
+          <Header />
 
-        <main>
-          <Component {...pageProps} />
-        </main>
+          <Container flex={1} maxW="container.xl">
+            <Component {...pageProps} />
+          </Container>
 
-        <Footer />
+          <Footer />
+        </VStack>
       </ChakraProvider>
     </ApolloProvider>
   )

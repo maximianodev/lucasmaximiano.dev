@@ -56,3 +56,20 @@ export const ALL_POSTS_SLUG = gql`
     }
   }
 `
+
+export const LATEST_POSTS = gql`
+  query LatestPosts($quantity: Int!) {
+    posts(last: $quantity) {
+      title
+      slug
+      tags
+      excerpt
+      category
+      updatedAt
+      coverImage {
+        fileName
+        url
+      }
+    }
+  }
+`

@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import ReactMarkDown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
 
 import { ALL_POSTS_SLUG, POST_BY_SLUG } from '../../../graphql/queries/blog'
 import { apolloClient } from '../../../client/apollo'
@@ -65,7 +65,7 @@ export const Post = ({ post }: PostItem) => {
       </div>
       <img src={post.coverImage.url} alt={post.title} className="post-img" />
       <div className="content">
-        <ReactMarkDown>{post.content.markdown}</ReactMarkDown>
+        <ReactMarkdown>{post.content.markdown}</ReactMarkdown>
       </div>
     </div>
   )

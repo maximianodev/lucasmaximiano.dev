@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { FiMenu } from 'react-icons/fi'
 import { useRouter } from 'next/router'
+import { SocialNetwork } from '../../SocialNetwork'
 
 type MenuItem = {
   title: string
@@ -45,7 +46,7 @@ const MenuMobile = ({ data }: MenuMobileProps) => {
 
   return (
     <div>
-      <Button ref={btnRef} variant="outline" colorScheme="teal" onClick={onOpen}>
+      <Button ref={btnRef} variant="outline" onClick={onOpen}>
         <Icon as={FiMenu} fontSize={24}  />
       </Button>
 
@@ -58,7 +59,7 @@ const MenuMobile = ({ data }: MenuMobileProps) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerBody mt={5}>
+          <DrawerBody mt={7}>
             <VStack align="self-start">
               {data.map((item) => (
                 <Link href={`/${item.slug}`} key={item.slug}>
@@ -68,7 +69,9 @@ const MenuMobile = ({ data }: MenuMobileProps) => {
             </VStack>
           </DrawerBody>
 
-          <DrawerFooter></DrawerFooter>
+          <DrawerFooter>
+            <SocialNetwork />
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </div>

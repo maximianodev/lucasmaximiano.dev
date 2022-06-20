@@ -5,15 +5,18 @@ import { AuthorProjects } from '../components/AuthorProjects'
 import type { AuthorProjectProps } from '../components/AuthorProjects'
 import { apolloClient } from '../client/apollo'
 import { PROJECTS } from '../graphql/queries/projects'
+import Head from 'next/head'
 
 interface ProjectsPageProps {
   projects: AuthorProjectProps[]
 }
 
 function Home({ projects }: ProjectsPageProps) {
-  
   return (
     <div>
+      <Head>
+        <title>Max | Projetos</title>
+      </Head>
       <h1>Projetos</h1>
 
       <AuthorProjects data={projects} />
