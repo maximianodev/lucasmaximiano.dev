@@ -11,6 +11,8 @@ import {
   Image,
   HStack,
   Text,
+  SimpleGrid,
+  useMediaQuery,
 } from '@chakra-ui/react'
 
 interface Posts {
@@ -34,47 +36,76 @@ interface Posts {
 
 function BlogList({ posts }: Posts) {
   const router = useRouter()
+  const [isPhone] = useMediaQuery('(max-width: 767px)')
 
   if (router.isFallback) return <h1>carregando...</h1>
 
   return (
-    <VStack align="flex-start" spacing={5}>
+    <SimpleGrid columns={{ sm: 1, md: 1, lg: 2 }} spacing={5}>
       {posts.map((post) => (
         <Box shadow="md" border="1px" borderRadius="md" key={post.id}>
           <Link href={`/blog/post/${post.slug}`}>
             <ChakraLink p={3} display="block">
-              <HStack align="flex-start" spacing={3}>
+              {isPhone && (
                 <Image
                   src={post.coverImage.url}
                   alt={post.slug}
                   height="200px"
-                  width="200px"
+                  width={'100%'}
                   objectFit="cover"
                   objectPosition="center"
                   borderRadius="md"
+                  display={['block', 'block', 'none']}
+                  mb={3}
                 />
+              )}
+              <HStack align="flex-start" spacing={3}>
+                {!isPhone && (
+                  <Image
+                    src={post.coverImage.url}
+                    alt={post.slug}
+                    height="200px"
+                    width="200px"
+                    objectFit="cover"
+                    objectPosition="center"
+                    borderRadius="md"
+                  />
+                )}
                 <Box>
                   <Text as="h2" fontSize="xl">
                     {post.title}
                   </Text>
-                  <HStack>
+                  <HStack my={1}>
                     {post.tags.map((tag) => (
-                      <Text key={tag} fontSize="xs">
+                      <Text
+                        key={tag}
+                        fontSize="x-small"
+                        bg="blackAlpha.200"
+                        color="currentcolor"
+                        fontWeight="bold"
+                        py="3px"
+                        px="7px"
+                        borderRadius="sm"
+                      >
                         {tag}
                       </Text>
                     ))}
                   </HStack>
                   <Text as="time" fontSize="xs">
-                    {post.publishedAt}
+                    {new Intl.DateTimeFormat('pt-BR', {
+                      dateStyle: 'medium',
+                    }).format(new Date(post.publishedAt))}
                   </Text>
-                  <Text mt={4}>{post.excerpt}</Text>
+                  <Text mt={4} fontSize="sm">
+                    {post.excerpt}
+                  </Text>
                 </Box>
               </HStack>
             </ChakraLink>
           </Link>
         </Box>
       ))}
-    </VStack>
+    </SimpleGrid>
   )
 }
 

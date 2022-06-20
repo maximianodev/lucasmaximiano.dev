@@ -13,7 +13,7 @@ export const ALL_POSTS = gql`
       category
       coverImage {
         fileName
-        url
+        url(transformation: { image: { resize: { width: 350, height: 350 } } })
       }
       content {
         markdown
@@ -33,7 +33,10 @@ export const POST_BY_SLUG = gql`
       excerpt
       category
       content {
+        raw
+        html
         markdown
+        text
       }
       coverImage {
         url
@@ -41,7 +44,9 @@ export const POST_BY_SLUG = gql`
       author {
         name
         picture {
-          url
+          url(
+            transformation: { image: { resize: { width: 100, height: 100 } } }
+          )
         }
       }
       createdAt

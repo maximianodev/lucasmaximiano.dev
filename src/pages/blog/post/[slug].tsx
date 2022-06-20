@@ -1,16 +1,16 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-
-import ReactMarkdown from 'react-markdown'
+import { RichTextContent } from '@graphcms/rich-text-types'
 
 import { ALL_POSTS_SLUG, POST_BY_SLUG } from '../../../graphql/queries/blog'
 import { apolloClient } from '../../../client/apollo'
+import { RichText } from '../../../components/ui/RichText'
 
 interface PostItem {
   post: {
     category: string
-    content: { markdown: string }
+    content: { raw: RichTextContent }
     coverImage: { fileName: string; url: string }
     excerpt: string
     id: string
@@ -64,9 +64,7 @@ export const Post = ({ post }: PostItem) => {
         ))}
       </div>
       <img src={post.coverImage.url} alt={post.title} className="post-img" />
-      <div className="content">
-        <ReactMarkdown>{post.content.markdown}</ReactMarkdown>
-      </div>
+      <RichText content={post.content.raw} />
     </div>
   )
 }
