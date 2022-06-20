@@ -45,9 +45,13 @@ const RichText = ({ content }: RichTextComponentProps) => {
         ),
         bold: ({ children }) => <Text as="strong">{children}</Text>,
         a: ({ children, href }) => <Link href={href}>{children}</Link>,
-        code: ({ children }) => <Text as="code">{children}</Text>,
+        code: ({ children }) => (
+          <Text as="code" bg="#333" color="#f2f2f2" fontFamily="monospace" px={2} py={.5}>
+            {children}
+          </Text>
+        ),
         p: ({ children }) => (
-          <Text as="p" my={3}  fontSize="sm">
+          <Text as="p" my={3} fontSize="sm">
             {children}
           </Text>
         ),
