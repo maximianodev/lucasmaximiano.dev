@@ -8,8 +8,7 @@ import { MenuDesktop } from './MenuDesktop'
 
 const menuItems = [
   { slug: '', title: 'Home' },
-  { slug: 'blog', title: 'Blog' },
-  { slug: 'projetos', title: 'Projetos' },
+  { slug: 'blog', title: 'Blog' }
 ]
 
 const Header = (): JSX.Element => {

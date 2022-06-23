@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 const AUTHOR_DATA_QUERY = gql`
   query AuthorQuery {
@@ -6,7 +6,10 @@ const AUTHOR_DATA_QUERY = gql`
       id
       name
       biography {
-        markdown
+        raw
+      }
+      picture {
+        url(transformation: { image: { resize: { width: 300, height: 300 } } })
       }
     }
   }

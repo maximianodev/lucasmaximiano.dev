@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const ALL_POSTS = gql`
   query AllPosts {
-    posts {
+    posts(orderBy: createdAt_DESC, locales: en) {
       id
       title
       slug
@@ -24,7 +24,7 @@ export const ALL_POSTS = gql`
 
 export const POST_BY_SLUG = gql`
   query PostBySlug($slugName: String) {
-    post(where: { slug: $slugName }) {
+    post(where: { slug: $slugName }, locales: en) {
       id
       title
       tags
@@ -34,12 +34,9 @@ export const POST_BY_SLUG = gql`
       category
       content {
         raw
-        html
-        markdown
-        text
       }
       coverImage {
-        url
+        url(transformation: { image: { resize: { width: 1300, height: 400 } } })
       }
       author {
         name
@@ -56,7 +53,7 @@ export const POST_BY_SLUG = gql`
 
 export const ALL_POSTS_SLUG = gql`
   query AllPostSlug {
-    posts {
+    posts(orderBy: createdAt_DESC, locales: en) {
       slug
     }
   }
@@ -64,7 +61,7 @@ export const ALL_POSTS_SLUG = gql`
 
 export const LATEST_POSTS = gql`
   query LatestPosts($quantity: Int!) {
-    posts(last: $quantity) {
+    posts(last: $quantity, orderBy: createdAt_DESC, locales: en) {
       title
       slug
       tags

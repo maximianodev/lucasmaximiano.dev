@@ -1,16 +1,18 @@
 import React from 'react'
+import Head from 'next/head'
+import { RichTextContent } from '@graphcms/rich-text-types'
 
 import { AUTHOR_DATA_QUERY } from '../graphql/queries/home'
 
 import { AuthorBiography } from '../components/AuthorBiography'
 
-import type { AuthorProjectProps } from '../components/AuthorProjects'
 import { apolloClient } from '../client/apollo'
-import Head from 'next/head'
 
 type Author = {
-  biography: { markdown: string }
-  projects: AuthorProjectProps[]
+  biography: { raw: RichTextContent }
+  picture: {
+    url: string
+  }
 }
 
 interface HomeProps {
@@ -18,14 +20,12 @@ interface HomeProps {
 }
 
 function Home({ data }: HomeProps) {
-  const { biography } = data
-
   return (
     <>
       <Head>
         <title>Max | Home</title>
       </Head>
-      <AuthorBiography data={biography.markdown} />
+      <AuthorBiography data={data} />
     </>
   )
 }
