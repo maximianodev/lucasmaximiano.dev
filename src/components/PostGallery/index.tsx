@@ -1,7 +1,11 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react'
+import { useQuery } from '@apollo/client'
+import { SimpleGrid } from '@chakra-ui/react'
 
+import { ALL_POSTS } from '../../graphql/queries/blog'
+import { PostGallerySkeleton } from '../Skeleton/PostGallerySkeleton'
 import { PostCard } from '../PostCard'
+import { ErrorMessage } from '../ui/ErrorMessage'
 
 interface PostGalleryProps {
   posts: [
@@ -22,15 +26,27 @@ interface PostGalleryProps {
   ]
 }
 
-function PostGallery({ posts }: PostGalleryProps): JSX.Element {
+function PostGallery(): JSX.Element {
+  const { data, loading, error } = useQuery<PostGalleryProps>(ALL_POSTS)
+
+  if (loading) return <PostGallerySkeleton />
+
+  if (error)
+    return (
+      <ErrorMessage
+        title="Erro ao buscar os dados, tente novamente mais tarde"
+        status="error"
+      />
+    )
+
+  const { posts } = data
+
   return (
-    <>
+    <SimpleGrid columns={{ sm: 1, md: 1, lg: 2 }} spacing={5}>
       {posts.map((post) => (
-        <Box shadow="md" border="1px" borderRadius="md" key={post.id}>
-          <PostCard post={post} />
-        </Box>
+        <PostCard post={post} key={post.id} />
       ))}
-    </>
+    </SimpleGrid>
   )
 }
 

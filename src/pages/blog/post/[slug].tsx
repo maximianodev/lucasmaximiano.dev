@@ -13,10 +13,11 @@ import {
   WrapItem,
   Image,
   useColorMode,
+  Tag,
 } from '@chakra-ui/react'
 
 import { ALL_POSTS_SLUG, POST_BY_SLUG } from '../../../graphql/queries/blog'
-import { apolloClient } from '../../../client/apollo'
+import { clientApollo } from '../../../client/apollo'
 import { RichText } from '../../../components/ui/RichText'
 import { formatData } from '../../../utils/formatDate'
 
@@ -95,17 +96,8 @@ export const Post = ({ post }: PostPageProps) => {
 
         <Wrap className="tags">
           {post.tags.map((item) => (
-            <WrapItem
-              key={item}
-              fontSize="x-small"
-              bg="blackAlpha.200"
-              color="currentcolor"
-              fontWeight="bold"
-              py="3px"
-              px="7px"
-              borderRadius="sm"
-            >
-              {item}
+            <WrapItem key={item}>
+              <Tag size="sm">{item}</Tag>
             </WrapItem>
           ))}
         </Wrap>
@@ -135,7 +127,7 @@ export const Post = ({ post }: PostPageProps) => {
 
 export const getStaticProps = async (context) => {
   try {
-    const { data } = await apolloClient.query({
+    const { data } = await clientApollo.query({
       query: POST_BY_SLUG,
       variables: {
         slugName: context.params.slug,
@@ -162,7 +154,7 @@ export const getStaticProps = async (context) => {
 }
 
 export const getStaticPaths = async () => {
-  const { data } = await apolloClient.query({
+  const { data } = await clientApollo.query({
     query: ALL_POSTS_SLUG,
   })
 

@@ -6,12 +6,12 @@ import type { AppProps } from 'next/app'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 
-import { apolloClient } from '../client/apollo'
+import { clientApollo } from '../client/apollo'
 import { theme } from '../styles/@chakra-ui/theme'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={clientApollo}>
       <ChakraProvider theme={theme}>
         <VStack minHeight="100vh">
           <Header />

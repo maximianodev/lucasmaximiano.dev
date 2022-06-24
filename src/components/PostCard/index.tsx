@@ -7,6 +7,7 @@ import {
   HStack,
   Text,
   useMediaQuery,
+  Tag,
 } from '@chakra-ui/react'
 
 import { formatData } from '../../utils/formatDate'
@@ -32,7 +33,7 @@ function PostCard({ post }: PostCardProps): JSX.Element {
   const [isPhone] = useMediaQuery('(max-width: 767px)')
 
   return (
-    <Box shadow="md" borderRadius="md" key={post.id}>
+    <Box shadow="md" borderRadius="md" key={post.id} border="1px">
       <Link href={`/blog/post/${post.slug}`}>
         <ChakraLink p={3} display="block">
           {isPhone && (
@@ -48,6 +49,7 @@ function PostCard({ post }: PostCardProps): JSX.Element {
               mb={3}
             />
           )}
+
           <HStack align="flex-start" spacing={3}>
             {!isPhone && (
               <Image
@@ -60,29 +62,22 @@ function PostCard({ post }: PostCardProps): JSX.Element {
                 borderRadius="md"
               />
             )}
+
             <Box>
               <Text as="h2" fontSize="xl">
                 {post.title}
               </Text>
+
               <HStack my={1}>
                 {post.tags.map((tag) => (
-                  <Text
-                    key={tag}
-                    fontSize="x-small"
-                    bg="blackAlpha.200"
-                    color="currentcolor"
-                    fontWeight="bold"
-                    py="3px"
-                    px="7px"
-                    borderRadius="sm"
-                  >
-                    {tag}
-                  </Text>
+                  <Tag key={tag} size="sm">{tag}</Tag>
                 ))}
               </HStack>
+
               <Text as="time" fontSize="xs">
                 {formatData(post.publishedAt)}
               </Text>
+
               <Text mt={4} fontSize="sm">
                 {post.excerpt}
               </Text>

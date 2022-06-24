@@ -6,7 +6,7 @@ import { AUTHOR_DATA_QUERY } from '../graphql/queries/home'
 
 import { AuthorBiography } from '../components/AuthorBiography'
 
-import { apolloClient } from '../client/apollo'
+import { clientApollo } from '../client/apollo'
 
 type Author = {
   biography: { raw: RichTextContent }
@@ -31,7 +31,7 @@ function Home({ data }: HomeProps) {
 }
 
 export const getStaticProps = async () => {
-  const { data } = await apolloClient.query({
+  const { data } = await clientApollo.query({
     query: AUTHOR_DATA_QUERY,
   })
 
