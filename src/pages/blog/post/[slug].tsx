@@ -1,4 +1,5 @@
 import React from 'react'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { RichTextContent } from '@graphcms/rich-text-types'
@@ -14,12 +15,14 @@ import {
   Image,
   useColorMode,
   Tag,
+  Center,
 } from '@chakra-ui/react'
 
 import { ALL_POSTS_SLUG, POST_BY_SLUG } from '../../../graphql/queries/blog'
 import { clientApollo } from '../../../client/apollo'
 import { RichText } from '../../../components/ui/RichText'
 import { formatData } from '../../../utils/formatDate'
+import { PostSkeleton } from '../../../components/Skeleton/PostSkeleton'
 
 interface PostPageProps {
   post: {
@@ -47,9 +50,12 @@ export const Post = ({ post }: PostPageProps) => {
   const router = useRouter()
   const { colorMode } = useColorMode()
 
-  if (router.isFallback) return <>Carregando...</>
+  if (router.isFallback) return <PostSkeleton />
 
-  if (!post) return <h1>Não foi possivel encontrar este post ☹</h1>
+  if (!post) {
+    setTimeout(() => router.push('/blog'), 3000)
+    return <Center>Post Not Found ☹</Center>
+  }
 
   const themeColor = colorMode === 'dark' ? 'base' : 'white'
   const themeColorInvert = colorMode === 'dark' ? 'base' : 'black'
@@ -125,7 +131,7 @@ export const Post = ({ post }: PostPageProps) => {
   )
 }
 
-export const getStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { data } = await clientApollo.query({
       query: POST_BY_SLUG,
@@ -135,36 +141,29 @@ export const getStaticProps = async (context) => {
     })
     const { post } = data
 
-    if (!post) {
-      return {
-        notFound: true,
-      }
-    }
-
     return {
       props: { post },
+      revalidate: 60 * 60 * 24,
     }
   } catch (err) {
-    console.log(err)
-
     return {
       notFound: true,
     }
   }
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await clientApollo.query({
     query: ALL_POSTS_SLUG,
   })
 
   const paths = data.posts.map(({ slug }) => {
-    return { params: { slug: slug } }
+    return { params: { slug } }
   })
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 

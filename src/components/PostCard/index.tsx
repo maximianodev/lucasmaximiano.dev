@@ -55,8 +55,8 @@ function PostCard({ post }: PostCardProps): JSX.Element {
               <Image
                 src={post.coverImage.url}
                 alt={post.slug}
-                height="200px"
-                width="200px"
+                height="250px"
+                width="250px"
                 objectFit="cover"
                 objectPosition="center"
                 borderRadius="md"

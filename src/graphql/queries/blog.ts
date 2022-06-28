@@ -1,22 +1,33 @@
 import { gql } from '@apollo/client'
 
 export const ALL_POSTS = gql`
-  query AllPosts {
-    posts(orderBy: createdAt_DESC, locales: en) {
-      id
-      title
-      slug
-      tags
-      stage
-      publishedAt
-      excerpt
-      category
-      coverImage {
-        fileName
-        url(transformation: { image: { resize: { width: 350, height: 350 } } })
+  query AllPosts($perPage: Int!) {
+    postsConnection(orderBy: createdAt_DESC, locales: en, first: $perPage) {
+      pageInfo {
+        pageSize
+        hasPreviousPage
+        hasNextPage
       }
-      content {
-        markdown
+      edges {
+        node {
+          id
+          title
+          slug
+          tags
+          stage
+          publishedAt
+          excerpt
+          category
+          coverImage {
+            fileName
+            url(
+              transformation: { image: { resize: { width: 350, height: 350 } } }
+            )
+          }
+          content {
+            markdown
+          }
+        }
       }
     }
   }
