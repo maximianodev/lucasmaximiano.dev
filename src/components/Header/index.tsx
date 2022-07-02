@@ -2,7 +2,6 @@ import React from 'react'
 import { Box, Container, HStack } from '@chakra-ui/react'
 
 import { MenuMobile } from './MenuMobile'
-import { Logo } from '../Logo'
 import { ThemeSwitcher } from '../ThemeSwitcher'
 import { MenuDesktop } from './MenuDesktop'
 
@@ -19,12 +18,10 @@ const Header = (): JSX.Element => {
         alignItems="center"
         justifyContent="space-between"
         py={[5, 7]}
-        maxW="container.xl"
+        maxW="container.lg"
       >
         <HStack display="flex" alignItems="center" spacing={[5, 10]}>
           <MenuMobile data={menuItems} />
-
-          <Logo />
 
           <MenuDesktop data={menuItems} />
         </HStack>

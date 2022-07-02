@@ -20,7 +20,7 @@ const SocialNetwork = () => {
         <Icon as={FiInstagram} fontSize={['22px', '24px']} />
       </Link>
       <Link
-        href="https://github.com/sr-max"
+        href="https://github.com/maximianodev"
         target="_blank"
         rel="noopener noreferrer"
       >

@@ -1,45 +1,49 @@
 import React from 'react'
-import { Box, Image, HStack } from '@chakra-ui/react'
+import { Box, Image, HStack, Skeleton } from '@chakra-ui/react'
 import { RichTextContent } from '@graphcms/rich-text-types'
 
 import { RichText } from '../ui/RichText'
+import { useQuery } from '@apollo/client'
+import { AUTHOR_DATA_QUERY } from '../../graphql/queries/home'
 
 type Author = {
-  biography: { raw: RichTextContent }
-  picture: {
-    url: string
+  author: {
+    biography: { raw: RichTextContent }
+    picture: {
+      url: string
+    }
   }
 }
 
-interface AuthorBiographyProps {
-  data: Author
-}
+const AuthorBiography = () => {
+  const { data, loading, error } = useQuery<Author>(AUTHOR_DATA_QUERY)
 
-const AuthorBiography = ({ data }: AuthorBiographyProps) => {
+  if (loading) return <Skeleton w="100%" h="400px" borderRadius="md" />
+
+  const { author } = data
+
   return (
     <HStack
-      align="self-start"
       borderWidth="1px"
       borderRadius="md"
-      p={5}
       spacing={0}
-      shadow="md"
-      _hover={{ shadow: 'lg' }}
-      transition="box-shadow .3s ease"
       fontSize={['sm', 'md']}
       flexDirection={['column', 'row']}
+      justifyContent="space-between"
+      shadow="sm"
     >
+      <Box pl={5} pr={0}>
+        <RichText content={author.biography.raw} fontSize={['sm']} />
+      </Box>
       <Image
-        src={data.picture.url}
-        width={['100%', '300px']}
-        height={['auto', '300px']}
+        src={author.picture.url}
+        width={['200px']}
+        height={['auto', '200px']}
         objectFit="cover"
         objectPosition="center"
         borderRadius="md"
+        alignSelf="flex-end"
       />
-      <Box pl={['0', '1rem']} pt={['1rem', '0']}>
-        <RichText content={data.biography.raw} fontSize={['sm', 'md']} />
-      </Box>
     </HStack>
   )
 }

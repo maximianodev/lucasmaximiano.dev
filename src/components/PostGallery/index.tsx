@@ -38,14 +38,13 @@ function PostGallery(): JSX.Element {
     ALL_POSTS,
     {
       variables: {
-        perPage: 4,
+        perPage: 6,
       },
     }
   )
 
   if (loading) return <PostGallerySkeleton />
-
-  if (error || !data.postsConnection)
+  if (error)
     return (
       <ErrorMessage
         title="Erro ao buscar os dados, tente novamente mais tarde"
@@ -54,24 +53,25 @@ function PostGallery(): JSX.Element {
     )
 
   const { postsConnection } = data
-
   const posts = postsConnection.edges.map((post) => ({ ...post.node }))
-
   const hasNextPage = data.postsConnection.pageInfo.hasNextPage
+
+  function loadMore() {
+    refetch({
+      perPage: postsConnection.edges.length + 3,
+    })
+  }
 
   return (
     <>
-      <SimpleGrid columns={{ sm: 1, md: 1, lg: 2 }} spacing={5}>
+      <SimpleGrid columns={{ sm: 2, md: 2, lg: 3 }} spacing={5}>
         {posts.map((post) => (
           <PostCard post={post} key={post.id} />
         ))}
       </SimpleGrid>
 
       {hasNextPage && (
-        <Center
-          mt={3}
-          onClick={() => refetch({ perPage: postsConnection.edges.length + 4 })}
-        >
+        <Center mt={3} onClick={loadMore}>
           <Button>Load More</Button>
         </Center>
       )}

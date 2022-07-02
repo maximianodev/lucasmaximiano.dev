@@ -1,12 +1,14 @@
-import { Container } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 import React from 'react'
 import { SocialNetwork } from '../SocialNetwork'
 
 const Footer = (): JSX.Element => {
   return (
-    <Container as="footer" py={10} maxW='container.xl'>
-      <SocialNetwork />
-    </Container>
+    <Box w="100%">
+      <Container as="footer" py={10} maxW="container.lg">
+        <SocialNetwork />
+      </Container>
+    </Box>
   )
 }
 

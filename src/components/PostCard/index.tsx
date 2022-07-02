@@ -6,11 +6,10 @@ import {
   Image,
   HStack,
   Text,
-  useMediaQuery,
   Tag,
 } from '@chakra-ui/react'
 
-import { formatData } from '../../utils/formatDate'
+import { formattedDate } from '../../utils/formatDate'
 
 interface PostCardProps {
   post: {
@@ -30,39 +29,22 @@ interface PostCardProps {
 }
 
 function PostCard({ post }: PostCardProps): JSX.Element {
-  const [isPhone] = useMediaQuery('(max-width: 767px)')
-
   return (
-    <Box shadow="md" borderRadius="md" key={post.id} border="1px">
-      <Link href={`/blog/post/${post.slug}`}>
+    <Box shadow="sm" borderRadius="md" key={post.id} borderWidth="1px">
+      <Link href={`/blog/${post.slug}`}>
         <ChakraLink p={3} display="block">
-          {isPhone && (
-            <Image
-              src={post.coverImage.url}
-              alt={post.slug}
-              height="200px"
-              width={'100%'}
-              objectFit="cover"
-              objectPosition="center"
-              borderRadius="md"
-              display={['block', 'block', 'none']}
-              mb={3}
-            />
-          )}
+          <Image
+            src={post.coverImage.url}
+            alt={post.slug}
+            height="200px"
+            width={'100%'}
+            objectFit="cover"
+            objectPosition="center"
+            borderRadius="md"
+            mb={3}
+          />
 
           <HStack align="flex-start" spacing={3}>
-            {!isPhone && (
-              <Image
-                src={post.coverImage.url}
-                alt={post.slug}
-                height="250px"
-                width="250px"
-                objectFit="cover"
-                objectPosition="center"
-                borderRadius="md"
-              />
-            )}
-
             <Box>
               <Text as="h2" fontSize="xl">
                 {post.title}
@@ -70,12 +52,14 @@ function PostCard({ post }: PostCardProps): JSX.Element {
 
               <HStack my={1}>
                 {post.tags.map((tag) => (
-                  <Tag key={tag} size="sm">{tag}</Tag>
+                  <Tag key={tag} size="sm">
+                    {tag}
+                  </Tag>
                 ))}
               </HStack>
 
               <Text as="time" fontSize="xs">
-                {formatData(post.publishedAt)}
+                {formattedDate(post.publishedAt)}
               </Text>
 
               <Text mt={4} fontSize="sm">

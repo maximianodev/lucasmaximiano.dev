@@ -73,15 +73,20 @@ export const ALL_POSTS_SLUG = gql`
 export const LATEST_POSTS = gql`
   query LatestPosts($quantity: Int!) {
     posts(last: $quantity, orderBy: createdAt_DESC, locales: en) {
+      id
       title
       slug
       tags
+      stage
+      publishedAt
       excerpt
       category
-      updatedAt
       coverImage {
         fileName
-        url
+        url(transformation: { image: { resize: { width: 350, height: 350 } } })
+      }
+      content {
+        markdown
       }
     }
   }

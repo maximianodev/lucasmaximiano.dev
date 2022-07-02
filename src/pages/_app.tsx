@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <VStack minHeight="100vh">
           <Header />
 
-          <Container flex={1} maxW="container.xl">
+          <Container flex={1} maxW="container.lg">
             <Component {...pageProps} />
           </Container>
 

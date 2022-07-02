@@ -4,7 +4,7 @@ const theme = extendTheme({
   initialColorMode: 'light',
   useSystemColorMode: false,
   fonts: {
-    body: `'Montserrat', sans-serif`,
+    body: `'Poppins', sans-serif`,
   },
 })
 
