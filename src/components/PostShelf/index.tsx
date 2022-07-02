@@ -52,6 +52,8 @@ const PostShelf = ({ title }: PostShelfProps) => {
 
   const { posts } = data
 
+  if(!posts.length) return <></>
+
   const themeBgColor = colorMode === 'dark' ? '#fff' : '#1a202c'
 
   return (
