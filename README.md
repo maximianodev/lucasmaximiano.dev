@@ -1,28 +1,10 @@
-# Portfolio
+# Blog
 
-<p align="center" width="300px">
-   <img src="./.github/demo.gif" />
-</p>
+Here you can find a summary about me and some posts about technology.
 
-Acesse - [Clicando aqui](https://lucasmaximiano-dev.vercel.app/)
+## Technologies
 
-## Tecnologias:
-
-    - NextJS
-    - TypeScript
-    - Styled Components
-    - GraphCMS
-
-**Rodar localmente**  
-Necessario configurar o .env antes de rodar para consumir os dados do GraphCMS
-
-```
-    $ yarn
-    $ yarn dev
-```
-
-## Funcionalidades:
-
-    1° Versão 04/2021
-        - Consumindo dados via GraphQL do GraphCMS;
-        - Temas Light e Dark;
+- NextJS
+- TypeScript
+- ChakraUI
+- Apollo GraphQL
