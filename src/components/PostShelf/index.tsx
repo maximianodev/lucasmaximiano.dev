@@ -1,58 +1,37 @@
 import React from 'react'
-import { useQuery } from '@apollo/client'
 
 import { PostShelfSkeleton } from '../Skeleton/PostShelfSkeleton'
-import { LATEST_POSTS } from '../../graphql/queries/blog'
 import { PostCard } from '../PostCard'
-import {
-  Center,
-  HStack,
-  SimpleGrid,
-  Stack,
-  Text,
-  useColorMode,
-} from '@chakra-ui/react'
+import { SimpleGrid, Text, useColorMode } from '@chakra-ui/react'
 
-type PostShelfData = {
-  posts: {
-    category: string
-    coverImage: {
-      fileName: string
-      url: string
-    }
-    excerpt: string
-    id: string
-    publishedAt: Date
-    slug: string
-    stage: string
-    tags: string[]
-    title: string
-  }[]
+export type PostShelfData = {
+  category: string
+  coverImage: {
+    fileName: string
+    url: string
+  }
+  excerpt: string
+  id: string
+  publishedAt: Date
+  slug: string
+  stage: string
+  tags: string[]
+  title: string
 }
 
 interface PostShelfProps {
   title: string
+  posts: PostShelfData[]
 }
 
-const PostShelf = ({ title }: PostShelfProps) => {
-  const { data, loading, error } = useQuery<PostShelfData>(LATEST_POSTS, {
-    variables: {
-      quantity: 3,
-    },
-  })
+const PostShelf = ({ title, posts }: PostShelfProps) => {
   const { colorMode } = useColorMode()
 
-  if (loading) {
+  if (!posts) {
     return <PostShelfSkeleton />
   }
 
-  if (error) {
-    return <></>
-  }
-
-  const { posts } = data
-
-  if(!posts.length) return <></>
+  if (!posts.length) return <></>
 
   const themeBgColor = colorMode === 'dark' ? '#fff' : '#1a202c'
 
@@ -63,7 +42,7 @@ const PostShelf = ({ title }: PostShelfProps) => {
         fontWeight="bold"
         fontSize="4xl"
         mb={4}
-        color={"chakra-body-bg"}
+        color={'chakra-body-bg'}
         textShadow={`
         -1px -1px 0 ${themeBgColor},
         1px -1px 0 ${themeBgColor},

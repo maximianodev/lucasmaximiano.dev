@@ -1,9 +1,8 @@
 import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 import { RichTextContent } from '@graphcms/rich-text-types'
-import { Box, Container, Center } from '@chakra-ui/react'
+import { Box, Center } from '@chakra-ui/react'
 
 import { clientApollo } from '../../client/apollo'
 import { ALL_POSTS_SLUG, POST_BY_SLUG } from '../../graphql/queries/blog'
@@ -12,7 +11,8 @@ import { PostAuthorInfo } from '../../components/PostAuthorInfo'
 import { PostTags } from '../../components/PostTags'
 import { PostContent } from '../../components/PostContent'
 import { PostCoverImage } from '../../components/PostCoverImage'
-import Breadcrumb from '../../components/Breadcrumb'
+import { Breadcrumb } from '../../components/Breadcrumb'
+import { Layout } from '../../components/Layout'
 
 type Author = {
   name: string
@@ -57,17 +57,20 @@ export const Post = ({ post }: PostPageProps) => {
     return <Center>Post Not Found ☹</Center>
   }
 
-  return (
+  const Meta = (
     <>
-      <Head>
-        <title>{`Blog - ${post.title}`}</title>
-        <meta name="description" content={post.excerpt} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.excerpt} />
-        <meta property="og:url" content={router.asPath} />
-        <meta property="og:type" content={`${post.tags}`} />
-      </Head>
+      <title>{`Blog - ${post.title}`}</title>
+      <meta name="description" content={post.excerpt} />
+      <meta property="og:title" content={post.title} />
+      <meta property="og:description" content={post.excerpt} />
+      <meta property="og:url" content={router.asPath} />
+      <meta property="og:type" content={`${post.tags}`} />
+      <meta property="og:image" content={post.coverImage.url} />
+    </>
+  )
 
+  return (
+    <Layout dynamicMeta={Meta}>
       <Box mb={5}>
         <Breadcrumb />
       </Box>
@@ -89,29 +92,8 @@ export const Post = ({ post }: PostPageProps) => {
           <PostContent title={post.title} content={post.content.raw} />
         </Box>
       </Box>
-    </>
+    </Layout>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  try {
-    const { data } = await clientApollo.query({
-      query: POST_BY_SLUG,
-      variables: {
-        slugName: context.params.slug,
-      },
-    })
-    const { post } = data
-
-    return {
-      props: { post },
-      revalidate: 60 * 60 * 24, // 24 hours
-    }
-  } catch (err) {
-    return {
-      notFound: true,
-    }
-  }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -126,6 +108,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths,
     fallback: 'blocking',
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  try {
+    const { data } = await clientApollo.query({
+      query: POST_BY_SLUG,
+      variables: {
+        slugName: context.params.slug,
+      },
+    })
+    const { post } = data
+
+    return {
+      props: { post },
+      revalidate: 60 * 60 * 12, // 12 hours
+    }
+  } catch (err) {
+    return {
+      notFound: true,
+    }
   }
 }
 

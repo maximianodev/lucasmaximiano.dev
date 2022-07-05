@@ -1,22 +1,18 @@
-import { Box } from '@chakra-ui/react'
-import Head from 'next/head'
 import React from 'react'
+import { Box } from '@chakra-ui/react'
 
 import { PostGallery } from '../../components/PostGallery'
-import Breadcrumb from '../../components/Breadcrumb'
+import { Breadcrumb } from '../../components/Breadcrumb'
+import { Layout } from '../../components/Layout'
 
 function BlogList() {
   return (
-    <>
-      <Head>
-        <title>Blog | Max</title>
-      </Head>
-
+    <Layout>
       <Box mb={5}>
         <Breadcrumb />
       </Box>
       <PostGallery />
-    </>
+    </Layout>
   )
 }
 

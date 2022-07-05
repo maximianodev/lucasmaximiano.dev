@@ -1,14 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import Head from 'next/head'
 import { Center, Link as ChakraLink } from '@chakra-ui/react'
+import { Layout } from '../components/Layout'
 
 function Custom404() {
   return (
-    <>
-      <Head>
-        <title>404 | Max</title>
-      </Head>
+    <Layout>
       <Center bg="blackAlpha.300">
         <Link href="/">
           <ChakraLink>
@@ -16,7 +13,7 @@ function Custom404() {
           </ChakraLink>
         </Link>
       </Center>
-    </>
+    </Layout>
   )
 }
 

@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  Center,
-  Divider,
   HStack,
   Icon,
   Text,
@@ -56,4 +54,4 @@ const Breadcrumb = () => {
   )
 }
 
-export default Breadcrumb
+export { Breadcrumb }

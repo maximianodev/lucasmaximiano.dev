@@ -1,27 +1,21 @@
 import React from 'react'
-import { Box, Image, HStack, Skeleton } from '@chakra-ui/react'
+import { Box, Image, HStack } from '@chakra-ui/react'
 import { RichTextContent } from '@graphcms/rich-text-types'
 
 import { RichText } from '../ui/RichText'
-import { useQuery } from '@apollo/client'
-import { AUTHOR_DATA_QUERY } from '../../graphql/queries/home'
 
-type Author = {
-  author: {
-    biography: { raw: RichTextContent }
-    picture: {
-      url: string
-    }
+export type Author = {
+  biography: { raw: RichTextContent }
+  picture: {
+    url: string
   }
 }
 
-const AuthorBiography = () => {
-  const { data, loading, error } = useQuery<Author>(AUTHOR_DATA_QUERY)
+interface AuthorBiographyProps {
+  author: Author
+}
 
-  if (loading) return <Skeleton w="100%" h="400px" borderRadius="md" />
-
-  const { author } = data
-
+const AuthorBiography = ({ author }: AuthorBiographyProps) => {
   return (
     <HStack
       borderWidth="1px"
