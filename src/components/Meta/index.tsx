@@ -47,6 +47,7 @@ const Meta = ({ dynamicMeta }: MetaProps): JSX.Element => {
 
   return (
     <Head>
+      <title>Lucas Maximiano</title>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
