@@ -65,19 +65,19 @@ export const Post = ({ post }: PostPageProps) => {
       <meta property="og:description" content={post.excerpt} />
       <meta property="og:url" content={router.asPath} />
       <meta property="og:type" content={`${post.tags}`} />
-      <meta property="og:image" content={post.coverImage.url} />
+      <meta property="og:image" content={post.coverImage?.url} />
     </>
   )
 
   return (
     <Layout dynamicMeta={Meta}>
       <Box mb={5}>
-        <Breadcrumb />
+        <Breadcrumb /> 
       </Box>
 
       <Box shadow="sm" borderRadius="md" borderWidth="1px" p={5}>
         <Box mb={5}>
-          <PostCoverImage title={post.title} url={post.coverImage.url} />
+          <PostCoverImage title={post.title} url={post.coverImage?.url} />
         </Box>
 
         <Box mb={5}>
@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { data } = await clientApollo.query({
       query: POST_BY_SLUG,
       variables: {
-        slugName: context.params.slug,
+        slugName: context.params.slug
       },
     })
     const { post } = data

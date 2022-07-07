@@ -34,7 +34,7 @@ function PostCard({ post }: PostCardProps): JSX.Element {
       <Link href={`/blog/${post.slug}`}>
         <ChakraLink p={3} display="block">
           <Image
-            src={post.coverImage.url}
+            src={post.coverImage?.url}
             alt={post.slug}
             height="200px"
             width={'100%'}

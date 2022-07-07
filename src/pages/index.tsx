@@ -21,7 +21,7 @@ function Home({ author, posts }: HomeProps) {
   return (
     <Layout>
       <AuthorBiography author={author} />
-      
+
       <Box my={7}>
         <PostShelf title="Latest Posts" posts={posts} />
       </Box>

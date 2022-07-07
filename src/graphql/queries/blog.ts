@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const ALL_POSTS = gql`
   query AllPosts($perPage: Int!) {
-    postsConnection(orderBy: createdAt_DESC, locales: en, first: $perPage) {
+    postsConnection(orderBy: createdAt_DESC, first: $perPage) {
       pageInfo {
         pageSize
         hasPreviousPage
@@ -35,7 +35,7 @@ export const ALL_POSTS = gql`
 
 export const POST_BY_SLUG = gql`
   query PostBySlug($slugName: String) {
-    post(where: { slug: $slugName }, locales: en) {
+    post(where: { slug: $slugName }) {
       id
       title
       tags
@@ -64,7 +64,7 @@ export const POST_BY_SLUG = gql`
 
 export const ALL_POSTS_SLUG = gql`
   query AllPostSlug {
-    posts(orderBy: createdAt_DESC, locales: en) {
+    posts(orderBy: createdAt_DESC) {
       slug
     }
   }
@@ -72,7 +72,7 @@ export const ALL_POSTS_SLUG = gql`
 
 export const LATEST_POSTS = gql`
   query LatestPosts($quantity: Int!) {
-    posts(last: $quantity, orderBy: createdAt_DESC, locales: en) {
+    posts(last: $quantity, orderBy: createdAt_DESC) {
       id
       title
       slug

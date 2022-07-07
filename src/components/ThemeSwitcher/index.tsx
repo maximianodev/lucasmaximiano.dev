@@ -9,14 +9,14 @@ const ThemeSwitcher = (): JSX.Element => {
 
   return (
     <Stack direction="row" alignItems="center">
-      <Icon as={FiSun} fontSize={["14px", "18px"]} />
+      <Icon as={FiSun} fontSize={['16px', '18px']} />
       <Switch
         colorScheme="teal"
-        size={['md', 'lg']}
+        size={['lg']}
         onChange={toggleColorMode}
         isChecked={isDarkMode}
       />
-      <Icon as={FiMoon} fontSize={["14px", "18px"]}/>
+      <Icon as={FiMoon} fontSize={['16px', '18px']} />
     </Stack>
   )
 }

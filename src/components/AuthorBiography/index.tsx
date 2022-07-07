@@ -33,6 +33,7 @@ const AuthorBiography = ({ author }: AuthorBiographyProps) => {
         src={author.picture.url}
         width={['200px']}
         height={['auto', '200px']}
+        alt="Lucas Maximiano"
         objectFit="cover"
         objectPosition="center"
         borderRadius="md"
